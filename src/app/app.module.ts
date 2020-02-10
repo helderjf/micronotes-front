@@ -10,10 +10,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterSuccessComponent } from './auth/register-success/register-success.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HomeComponent } from './home/home.component';
+import { NoteCardComponent } from './notes/note-card/note-card.component';
+import { NoteDashboardComponent } from './notes/note-dashboard/note-dashboard.component';
+import { HttpClientInterceptor } from './http-request-interceptor';
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterSuccessComponent,
     WelcomeComponent,
-    HomeComponent
+    HomeComponent,
+    NoteCardComponent,
+    NoteDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +42,11 @@ import { HomeComponent } from './home/home.component';
       {path: 'register', component: RegisterComponent},
       {path: 'register-success', component: RegisterSuccessComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'home', component: HomeComponent},
+      {path: 'notes', component: NoteDashboardComponent},
     ]),
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

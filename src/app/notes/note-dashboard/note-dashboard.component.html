@@ -1,0 +1,7 @@
+<div class="card-columns" *ngFor="let note of notes | async">
+    <div class="card bg-primary">
+      <div class="card-body text-center">
+        <p class="card-text">{{note.title}}</p>
+      </div>
+    </div>
+  </div>
