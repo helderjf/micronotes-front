@@ -1,7 +1,15 @@
-<div class="card-columns" *ngFor="let note of notes | async">
-    <div class="card bg-primary">
-      <div class="card-body text-center">
-        <p class="card-text">{{note.title}}</p>
+<div class="container">
+  <div class="card-columns">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Add note</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Take a new note</h6>
+        <img src="assets/img/addnote.png" alt="add note">
+        <a href="#" class="card-link">delete</a>
       </div>
     </div>
+    <div *ngFor="let note of notes | async">
+      <app-note-card [note]="note"></app-note-card>
+    </div>
   </div>
+</div>
