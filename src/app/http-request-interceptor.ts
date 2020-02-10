@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Injectable } from '@angular/core';
@@ -13,13 +13,19 @@ export class HttpClientInterceptor implements HttpInterceptor {
             next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = this.$localStorage.retrieve("authenticationToken");
+    console.log("Bearer " + token);
     if (token) {
-      const cloned = req.clone({
-        headers: req.headers.set("Authorization",
-          "Bearer " + token)
-      });
-
-      return next.handle(cloned);
+      const bearerToken = 'Bearer ' + token;
+      const authReq = req.clone({ setHeaders: 
+                                    { 
+                                      'Content-Type': 'application/json',
+                                      'Authorization': bearerToken,
+                                      'Access-Control-Allow-Origin':'*'
+                                    } 
+                                });
+      console.log(authReq);
+      console.log(authReq.headers);
+      return next.handle(authReq);
     }
     else {
       return next.handle(req);
