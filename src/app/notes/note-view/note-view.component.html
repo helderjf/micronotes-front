@@ -1,0 +1,14 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <button type="button" class="btn btn-primary btn-lg" (click)="edit()">&lt;Back</button>
+        <h1 class="display-4">{{note.title}}</h1>
+        <h5 class="subtitle mb-2 text-muted">Created on : {{note.dateCreated | date : 'medium'}}</h5>
+        <h5 class="subtitle mb-2 text-muted">Last edited on : {{note.dateEdited | date : 'medium'}}</h5>
+        <h3></h3>
+        <p class="lead">{{note.text}}</p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary btn-lg" (click)="edit()">edit</button>
+          <button type="button" class="btn btn-outline-danger btn-lg" (click)="delete()">delete</button>
+        </div>
+      </div>
+  </div>

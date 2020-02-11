@@ -19,6 +19,7 @@ import { NoteDashboardComponent } from './notes/note-dashboard/note-dashboard.co
 import { HttpClientInterceptor } from './http-request-interceptor';
 import { NoteEditComponent } from './notes/note-edit/note-edit.component';
 import { NoteCreateComponent } from './notes/note-create/note-create.component';
+import { NoteViewComponent } from './notes/note-view/note-view.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NoteCreateComponent } from './notes/note-create/note-create.component';
     NoteCardComponent,
     NoteDashboardComponent,
     NoteEditComponent,
-    NoteCreateComponent
+    NoteCreateComponent,
+    NoteViewComponent
   ],
   imports: [
     BrowserModule,
