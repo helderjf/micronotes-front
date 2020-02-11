@@ -23,6 +23,13 @@ export class NoteService {
     return this.httpClient.get<Array<Note>>(this.url + 'all');
   }
 
+  delete(id:Number){
+    if(confirm("Delete note?")){
+      this.httpClient.delete(this.url + id).subscribe();
+    }
+  }
+
+
   mockNotes(): Observable<Array<Note>> {
     const notes = [
       {
