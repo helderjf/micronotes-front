@@ -4,4 +4,5 @@ export class Note {
     text: String;
     dateCreated: Date;
     dateEdited: Date;
+    ownerId: Number
   }
