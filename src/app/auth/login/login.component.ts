@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {LoginPayload} from '../login-payload';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
@@ -13,12 +13,15 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginPayload: LoginPayload;
+  submited = false;
+  invalid=false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
     });
+
     this.loginPayload = {
       email: '',
       password: ''
@@ -26,9 +29,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group(
+      {
+        email: ['', Validators.required, Validators.email],
+        password: ['', Validators.required]
+      }
+    );
   }
 
   onSubmit() {
+    this.submited = true;
+    if(this.loginForm.invalid){
+      alert("invalid values");
+      return;
+    }
     this.loginPayload.email = this.loginForm.get('email').value;
     this.loginPayload.password = this.loginForm.get('password').value;
 

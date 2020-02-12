@@ -1,16 +1,35 @@
 <div class="container">
+  <h2>Notes</h2>
   <div class="card-columns">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Add note</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Take a new note</h6>
-        <img src="assets/img/addnote.png" alt="add note">
-        <a href="#" class="card-link">delete</a>
+
+    
+    <!-- new note -->
+    <a routerLink="/note/create" routerLinkActive="router-link-active">
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <h3>New note...</h3>
+          <h5>Take a note.</h5>
+          <img src="assets/img/addnote.png" alt="add note">
+        </div>
       </div>
-    </div>
-    <div *ngFor="let note of notes | async">
-      <app-note-card [note]="note"></app-note-card>
-    </div>
+    </a>
+
+
+
+    <!-- existing notes -->
+    <ng-container *ngFor="let note of notes | async">
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <h6>{{note.dateEdited | date : 'medium'}}</h6>
+          <h3>{{note.title}}</h3>
+          <p class="card-text">{{note.text}}</p>
+          <div class="btn-group flex-wrap" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="view(note.id)">view</button>
+            <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="edit(note.id)">edit</button>
+            <button type="button" class="btn btn-outline-danger btn-sm card-link" (click)="delete(note.id)">delete</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
-
