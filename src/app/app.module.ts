@@ -20,6 +20,7 @@ import { HttpClientInterceptor } from './http-request-interceptor';
 import { NoteEditComponent } from './notes/note-edit/note-edit.component';
 import { NoteCreateComponent } from './notes/note-create/note-create.component';
 import { NoteViewComponent } from './notes/note-view/note-view.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -48,10 +49,10 @@ import { NoteViewComponent } from './notes/note-view/note-view.component';
       {path: 'register', component: RegisterComponent},
       {path: 'register-success', component: RegisterSuccessComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'notes', component: NoteDashboardComponent},
-      {path: 'note/create', component: NoteCreateComponent},
-      {path: 'note/:id', component: NoteViewComponent},
-      {path: 'note/edit/:id', component: NoteEditComponent},
+      {path: 'notes', component: NoteDashboardComponent, canActivate: [AuthGuard]},
+      {path: 'note/create', component: NoteCreateComponent, canActivate: [AuthGuard]},
+      {path: 'note/:id', component: NoteViewComponent, canActivate: [AuthGuard]},
+      {path: 'note/edit/:id', component: NoteEditComponent, canActivate: [AuthGuard]},
     ]),
     HttpClientModule
   ],
