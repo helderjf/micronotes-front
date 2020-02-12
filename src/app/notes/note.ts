@@ -1,8 +1,8 @@
 export class Note {
-    id: Number
-    title: String;
-    text: String;
+    id: number
+    title: string;
+    text: string;
     dateCreated: Date;
     dateEdited: Date;
-    ownerId: Number
+    ownerId: number
   }
