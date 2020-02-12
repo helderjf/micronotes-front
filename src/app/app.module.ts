@@ -49,6 +49,9 @@ import { NoteViewComponent } from './notes/note-view/note-view.component';
       {path: 'register-success', component: RegisterSuccessComponent},
       {path: 'login', component: LoginComponent},
       {path: 'notes', component: NoteDashboardComponent},
+      {path: 'note/create', component: NoteCreateComponent},
+      {path: 'note/:id', component: NoteViewComponent},
+      {path: 'note/edit/:id', component: NoteEditComponent},
     ]),
     HttpClientModule
   ],

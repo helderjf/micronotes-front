@@ -3,31 +3,41 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of } from 'rxjs';
 import { Note } from './note';
-import { JwtAuthResponse } from '../auth/jwt-auth-response';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
 
-  private self: NoteService;
   private url = 'http://localhost:8080/api/notes/';
-  private notes: Array<Note>;
 
   constructor(private httpClient: HttpClient, private localStoraqeService: LocalStorageService) { 
-    this.self = this;
   }
 
   getAll(): Observable<Array<Note>> {
     return this.httpClient.get<Array<Note>>(this.url + 'all');
   }
 
-  delete(id:Number){
+  createNote(note: Note): Observable<Note>{
+    return this.httpClient.post<Note>(this.url + 'create', note);
+  }
+
+  getNote(id: number): any{
+    let note: any;
+    return this.httpClient.get<Array<Note>>(this.url + id).toPromise();
+  }
+
+  editNote(note: Note):Observable<Note>{
+    return this.httpClient.put<Note>(this.url + note.id, note);
+  }
+
+  delete(id:number):Observable<any>{
     if(confirm("Delete note?")){
-      this.httpClient.delete(this.url + id).subscribe();
+      return this.httpClient.delete<any>(this.url + id);
     }
   }
+
+
 
 
   mockNotes(): Observable<Array<Note>> {
