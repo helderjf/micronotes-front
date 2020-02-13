@@ -13,7 +13,6 @@ export class HttpClientInterceptor implements HttpInterceptor {
             next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = this.$localStorage.retrieve("authenticationToken");
-    console.log("Bearer " + token);
     if (token) {
       const bearerToken = 'Bearer ' + token;
       const authReq = req.clone({ setHeaders: 
@@ -23,8 +22,6 @@ export class HttpClientInterceptor implements HttpInterceptor {
                                       'Access-Control-Allow-Origin':'*'
                                     } 
                                 });
-      console.log(authReq);
-      console.log(authReq.headers);
       return next.handle(authReq);
     }
     else {

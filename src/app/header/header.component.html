@@ -3,7 +3,8 @@
       <div class="row">
         <div class="col-md-6">
           <!-- Title -->
-          <h1><a href="" class="title"> Micronotes</a></h1>
+          <h1 *ngIf="!authService.isAuthenticated()"><a href="" class="title"> Micronotes</a></h1>
+          <h1 *ngIf="authService.isAuthenticated()"><a href="/notes" class="title"> Micronotes</a></h1>
         </div> 
         <!-- Logout -->
         <div class="col-md-3" *ngIf="authService.isAuthenticated()">

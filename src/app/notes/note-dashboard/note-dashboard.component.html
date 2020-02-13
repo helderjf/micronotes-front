@@ -17,12 +17,12 @@
 
 
     <!-- existing notes -->
-    <ng-container *ngFor="let note of notes | async">
+    <ng-container *ngFor="let note of notesArray">
       <div class="card bg-light">
         <div class="card-body text-center">
-          <h6>{{note.dateEdited | date : 'medium'}}</h6>
+          <h6 class="text-muted">{{note.dateEdited | date : 'medium'}}</h6>
           <h3>{{note.title}}</h3>
-          <p class="card-text">{{note.text}}</p>
+          <div style="white-space: pre-wrap;" class="card-text" innerHTML={{note.text}}></div>
           <div class="btn-group flex-wrap" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="view(note.id)">view</button>
             <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="edit(note.id)">edit</button>
