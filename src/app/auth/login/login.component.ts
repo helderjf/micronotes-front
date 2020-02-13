@@ -14,13 +14,15 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginPayload: LoginPayload;
   submited = false;
-  invalid=false;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
-    this.loginForm = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
-    });
+    
+    this.loginForm = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]]
+      }
+    );
 
     this.loginPayload = {
       email: '',
@@ -29,12 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]]
-      }
-    );
   }
 
   onSubmit() {

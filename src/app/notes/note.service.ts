@@ -32,9 +32,7 @@ export class NoteService {
   }
 
   delete(id:number):Observable<any>{
-    if(confirm("Delete note?")){
-      return this.httpClient.delete<any>(this.url + id);
-    }
+    return this.httpClient.delete<any>(this.url + id);
   }
 
 
