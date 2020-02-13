@@ -21,6 +21,7 @@ import { NoteEditComponent } from './notes/note-edit/note-edit.component';
 import { NoteCreateComponent } from './notes/note-create/note-create.component';
 import { NoteViewComponent } from './notes/note-view/note-view.component';
 import { AuthGuard } from './auth.guard';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    QuillModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: WelcomeComponent},
