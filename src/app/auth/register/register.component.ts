@@ -54,10 +54,13 @@ export class RegisterComponent implements OnInit {
     this.registerPayload.email = this.registerForm.get('email').value;
     this.registerPayload.password = this.registerForm.get('password').value;
 
-    this.authService.register(this.registerPayload).subscribe(data => {
-      console.log('register succes');
-      this.router.navigateByUrl('/register-success');
-    }, error => {
+    this.authService.register(this.registerPayload)
+      .toPromise()
+      .then(() => {
+        console.log('register succes');
+        this.router.navigateByUrl('/register-success');
+    }).catch((error) => {
+      console.log(error);
       console.log('register failed');
     });
   }

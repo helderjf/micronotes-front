@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Note } from '../note';
 import { NoteService } from '../note.service';
 
@@ -11,26 +10,70 @@ import { NoteService } from '../note.service';
 })
 export class NoteDashboardComponent implements OnInit {
 
-  notes: Observable<Array<Note>>;
+  notesArray: Array<Note>
+
+
 
 
   constructor(private noteService: NoteService, private router: Router) {
-    this.notes = this.noteService.getAll();
-   }
+    this.getData();
+  }
+
+
+
+
 
   ngOnInit() {
-    this.notes = this.noteService.getAll();
+    // this.getData();
   }
 
-  view(id: number){
-    this.router.navigateByUrl('/note/'+id);
+
+
+
+
+  getData() {
+    this.noteService.getAllNotes()
+      .toPromise()
+      .then((data) => {
+        this.notesArray = data.sort((a, b) => {
+          let dateA = new Date(a.dateEdited).getMilliseconds();
+          let dateB = new Date(b.dateEdited).getMilliseconds();
+          return dateA - dateB;
+        })
+      })
+      .catch((err) => { console.log(err); });
   }
-  edit(id: number){
-    this.router.navigateByUrl('/note/edit/'+id);
+
+
+
+
+  
+  view(id: number) {
+    this.router.navigateByUrl('/note/' + id);
   }
-  delete(id: number){
-    this.noteService.delete(id).subscribe();
-    this.router.navigateByUrl('/notes');
+
+
+
+
+
+  edit(id: number) {
+    this.router.navigateByUrl('/note/edit/' + id);
   }
+
+
+
+
+
+  delete(id: number) {
+    if(confirm("Delete note?")){
+      this.noteService.delete(id)
+      .toPromise()
+      .then(() => {
+        this.getData();
+      })
+      .catch((err) => { console.log(err) });
+    }
+  }
+
 
 }

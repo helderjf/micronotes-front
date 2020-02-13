@@ -42,13 +42,23 @@ export class LoginComponent implements OnInit {
     this.loginPayload.email = this.loginForm.get('email').value;
     this.loginPayload.password = this.loginForm.get('password').value;
 
-    this.authService.login(this.loginPayload).subscribe(data => {
-      if (data) {
+    this.login(this.loginPayload);
+
+  }
+  
+  login(credetials: LoginPayload){
+    this.authService.login(credetials)
+      .toPromise()
+      .then((data)=>{
         console.log('login success');
         this.router.navigateByUrl('/notes');
-      } else {
+      })
+      .catch((err)=>{
+        console.log(err);
         console.log('Login failed');
-      }
-    });
+        alert("Login failed!");
+      });
+
   }
+
 }

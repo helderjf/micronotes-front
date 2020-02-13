@@ -13,29 +13,40 @@ export class NoteEditComponent implements OnInit {
 
   note: Note;
   id: number;
-  editNoteForm: FormGroup;
-  
+  editNoteForm: FormGroup; 
+
+
   constructor(private noteService: NoteService, private router:Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { 
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.noteService.getNote(this.id).then((data: Note)=> this.note=data);
-
+    
     this.editNoteForm = this.formBuilder.group({
       title: '',
       text: ''
     });
-    
-    this.note = {
-      id: null,
-      title: '',
-      text: '',
-      dateCreated: null,
-      dateEdited: null,
-      ownerId: null,
-    };
+
+    this.getData();
   }
 
   ngOnInit() {
   }
+
+  getData(){
+    this.noteService.getNote(this.id)
+      .toPromise()
+      .then((data: Note)=> {
+      this.note=data
+      this.editNoteForm = this.formBuilder.group({
+        title: this.note.title,
+        text: this.note.text});})
+      .catch((err)=>{
+        console.log(err);
+        this.goBack();
+        alert("Can't process your request");
+    });
+  }
+
+
+
 
   onSubmit(){
     this.note.title=this.editNoteForm.get('title').value;

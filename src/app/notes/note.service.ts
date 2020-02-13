@@ -14,7 +14,7 @@ export class NoteService {
   constructor(private httpClient: HttpClient, private localStoraqeService: LocalStorageService) { 
   }
 
-  getAll(): Observable<Array<Note>> {
+  getAllNotes(): Observable<Array<Note>> {
     return this.httpClient.get<Array<Note>>(this.url + 'all');
   }
 
@@ -22,9 +22,8 @@ export class NoteService {
     return this.httpClient.post<Note>(this.url + 'create', note);
   }
 
-  getNote(id: number): any{
-    let note: any;
-    return this.httpClient.get<Array<Note>>(this.url + id).toPromise();
+  getNote(id: number): Observable<Note>{
+    return this.httpClient.get<Note>(this.url + id);
   }
 
   editNote(note: Note):Observable<Note>{

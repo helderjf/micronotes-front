@@ -16,7 +16,6 @@ export class NoteCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private noteService: NoteService, private router: Router) { 
 
-    
     this.createNoteForm = this.formBuilder.group({
       title: '',
       text: ''
@@ -30,8 +29,11 @@ export class NoteCreateComponent implements OnInit {
       dateEdited: null,
       ownerId: null,
     };
-    
   }
+
+
+
+
 
   ngOnInit() {
   }
@@ -39,15 +41,29 @@ export class NoteCreateComponent implements OnInit {
   onSubmit(){
     this.note.title=this.createNoteForm.get('title').value;
     this.note.text=this.createNoteForm.get('text').value;
+    this.createNote();
+  }
 
-    this.noteService.createNote(this.note).subscribe(data =>{
-      console.log("note created");
-      this.router.navigateByUrl('/notes');
-    }, error =>{
-      console.log('Create note failed!');
-    });
+  
+
+
+
+  createNote(){
+    this.noteService.createNote(this.note)
+      .toPromise()
+      .then((data) =>{
+        console.log("note created");
+        this.router.navigateByUrl('/notes');})
+        .catch((err) =>{
+          console.log(err);
+          console.log('Create note failed!');
+          this.goBack();});
   }
   
+
+
+
+
   goBack(){
     this.router.navigateByUrl('/notes');
   }
