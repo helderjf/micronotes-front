@@ -13,8 +13,6 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { HomeComponent } from './home/home.component';
-import { NoteCardComponent } from './notes/note-card/note-card.component';
 import { NoteDashboardComponent } from './notes/note-dashboard/note-dashboard.component';
 import { HttpClientInterceptor } from './http-request-interceptor';
 import { NoteEditComponent } from './notes/note-edit/note-edit.component';
@@ -32,8 +30,6 @@ import { QuillModule } from 'ngx-quill';
     LoginComponent,
     RegisterSuccessComponent,
     WelcomeComponent,
-    HomeComponent,
-    NoteCardComponent,
     NoteDashboardComponent,
     NoteEditComponent,
     NoteCreateComponent,
