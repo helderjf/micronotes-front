@@ -6,3 +6,7 @@
 .create-note{
     max-width: 1000px;
 }
+
+h1 {
+    margin-top: 15px;
+  }

@@ -2,6 +2,7 @@ import { NoteService } from './../note.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Note } from '../note';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-note-view',
@@ -13,9 +14,27 @@ export class NoteViewComponent implements OnInit {
   note: Note;
   id: number;
 
-  constructor(private noteService: NoteService, private router:Router, private route: ActivatedRoute) { 
+  quillEditorStyle= {
+    fontSize: '100%',
+    minHeight: '200px',
+    // border:'none',
+    backgroundColor: 'white',
+    borderRadius: '10px',
+    borderColor: '#c8def4'
+  }
+
+
+
+
+
+  constructor(private noteService: NoteService, 
+              private router:Router, 
+              private route: ActivatedRoute,
+              private _location: Location) { 
     this.id = +this.route.snapshot.paramMap.get('id');
     this.getData(this.id);
+
+
   }
 
   ngOnInit() {
@@ -51,7 +70,9 @@ export class NoteViewComponent implements OnInit {
 
 
   delete(){
-    this.noteService.delete(this.note.id)
+
+    if(confirm("Delete note?")){
+      this.noteService.delete(this.note.id)
       .toPromise()
       .then(()=>{
         this.router.navigateByUrl('/notes');
@@ -61,6 +82,11 @@ export class NoteViewComponent implements OnInit {
         alert("Can't process your request");
         this.goBack();
       });
+    }
+
+
+
+
   }
   
 
@@ -68,7 +94,7 @@ export class NoteViewComponent implements OnInit {
 
 
   goBack(){
-    this.router.navigateByUrl('/notes');
+    this._location.back();
   }
 
 

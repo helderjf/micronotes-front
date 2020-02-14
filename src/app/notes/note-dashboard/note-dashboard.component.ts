@@ -12,6 +12,15 @@ export class NoteDashboardComponent implements OnInit {
 
   notesArray: Array<Note>
 
+  quillEditorStyle= {
+    fontSize: '100%',
+    // border:'none',
+    // backgroundColor: '#e8f2fc',
+    borderRadius: '10px',
+    borderColor: '#c8def4',
+    marginBottom: '25px'
+  }
+
 
 
 

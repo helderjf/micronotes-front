@@ -13,6 +13,11 @@ export class NoteCreateComponent implements OnInit {
 
   createNoteForm: FormGroup;
   note: Note;
+  quillEditorStyle= {
+    height: '300px',
+    backgroundColor: 'white',
+    fontSize: '100%'
+  }
 
   constructor(private formBuilder: FormBuilder, private noteService: NoteService, private router: Router) { 
 

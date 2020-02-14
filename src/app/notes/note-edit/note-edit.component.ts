@@ -3,6 +3,7 @@ import { Note } from '../note';
 import { NoteService } from '../note.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-note-edit',
@@ -15,8 +16,18 @@ export class NoteEditComponent implements OnInit {
   id: number;
   editNoteForm: FormGroup; 
 
+  quillEditorStyle= {
+    height: '300px',
+    backgroundColor: 'white',
+    fontSize: '100%'
+  }
 
-  constructor(private noteService: NoteService, private router:Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { 
+
+  constructor(private noteService: NoteService,
+               private router:Router, private route: ActivatedRoute, 
+               private formBuilder: FormBuilder, 
+               private _location: Location) { 
+                 
     this.id = +this.route.snapshot.paramMap.get('id');
     
     this.editNoteForm = this.formBuilder.group({
@@ -61,7 +72,7 @@ export class NoteEditComponent implements OnInit {
   }
 
   goBack(){
-    this.router.navigateByUrl('/notes');
+    this._location.back();
   }
 
 }
