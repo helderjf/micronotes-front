@@ -9,7 +9,10 @@ import {AuthService} from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  private fullName : string;
+
   constructor(private authService: AuthService, private router:Router) {
+      this.fullName = this.authService.getFullName();
   }
 
   ngOnInit() {

@@ -32,6 +32,10 @@ export class AuthService {
     return this.localStoraqeService.retrieve('fullName') != null;
   }
 
+  getFullName(): string {
+    return this.localStoraqeService.retrieve('fullName');
+  }
+
   logout() {
     this.localStoraqeService.clear('authenticationToken');
     this.localStoraqeService.clear('fullName');

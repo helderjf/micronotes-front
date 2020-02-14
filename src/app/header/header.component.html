@@ -6,6 +6,13 @@
           <h1 *ngIf="!authService.isAuthenticated()"><a href="" class="title"> Micronotes</a></h1>
           <h1 *ngIf="authService.isAuthenticated()"><a href="/notes" class="title"> Micronotes</a></h1>
         </div> 
+
+        <!-- User Name -->
+        <div class="col-md-3" *ngIf="!authService.isAuthenticated()"></div>
+        <div class="col-md-3" *ngIf="authService.isAuthenticated()">
+            <span class="logout">{{fullName}}</span>
+        </div>
+
         <!-- Logout -->
         <div class="col-md-3" *ngIf="authService.isAuthenticated()">
             <button class="logout btn btn-default" (click)="logout()">Logout</button>
