@@ -18,3 +18,7 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+html, body {
+  margin: 0;
+  height: 100%;
+}
