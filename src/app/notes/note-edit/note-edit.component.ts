@@ -63,13 +63,29 @@ export class NoteEditComponent implements OnInit {
     this.note.title=this.editNoteForm.get('title').value;
     this.note.text=this.editNoteForm.get('text').value;
 
-    this.noteService.editNote(this.note).subscribe(data =>{
-      console.log("note updated");
-      this.router.navigateByUrl('/notes');
-    }, error =>{
-      console.log('Update note failed!');
-    });
+    if(this.note.title.trim() == '' 
+      || this.note.text == null
+      || this.note.text.trim() == ''){
+      alert("Title and text can't be empty");
+      return;
+    }
+    this.updateNote();
   }
+
+  
+updateNote(){
+  this.noteService.editNote(this.note)
+  .toPromise()
+  .then(()=>{
+    console.log("note updated");
+    this.router.navigateByUrl('/notes');})
+  .catch((err)=>{
+    console.log('Update note failed!');
+    alert(err);
+    alert('Could not process your request');});
+}
+
+
 
   goBack(){
     this._location.back();

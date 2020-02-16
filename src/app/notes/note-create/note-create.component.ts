@@ -46,6 +46,15 @@ export class NoteCreateComponent implements OnInit {
   onSubmit(){
     this.note.title=this.createNoteForm.get('title').value;
     this.note.text=this.createNoteForm.get('text').value;
+
+    if(this.note.title.trim() == '' 
+      || this.note.text == null
+      || this.note.text.trim() == ''){
+      alert("Title and text can't be empty");
+      return;
+    }
+
+
     this.createNote();
   }
 
